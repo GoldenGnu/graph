@@ -4,7 +4,7 @@
 	<groupId>uk.me.candle</groupId>
 	<artifactId>graph</artifactId>
 	<packaging>jar</packaging>
-	<version>1.1.0-SNAPSHOT</version>
+	<version>1.5.0</version>
 	<name>graph</name>
 	<url>http://maven.apache.org</url>
 	<distributionManagement>
@@ -20,8 +20,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>2.0.2</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.8</source>
+					<target>1.8</target>
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
@@ -32,18 +32,6 @@
 				<configuration>
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<version>2.7</version>
-				<dependencies>
-					<dependency>
-						<groupId>com.google.code.maven-svn-wagon</groupId>
-						<artifactId>maven-svn-wagon</artifactId>
-						<version>1.4</version>
-					</dependency>
-				</dependencies>
 			</plugin>
 		</plugins>
 		<extensions>
