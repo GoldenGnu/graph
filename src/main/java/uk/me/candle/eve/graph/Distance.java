@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2016, Niklas Kyster Rasmussen, Flaming Candle
+ * Copyright 2015-2020, Niklas Kyster Rasmussen, Flaming Candle
  *
  * This file is part of Graph
  *
@@ -23,7 +23,7 @@ package uk.me.candle.eve.graph;
 import java.util.List;
 
 
-public interface Distance {
-	public int distanceBetween(Node a, Node b);
-	public List<Node> routeBetween(Node start, Node end);
+public interface Distance<T extends Node> {
+    public int distanceBetween(T a, T b);
+    public List<T> routeBetween(T start, T end);
 }

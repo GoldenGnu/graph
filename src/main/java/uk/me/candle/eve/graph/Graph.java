@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2016, Niklas Kyster Rasmussen, Flaming Candle
+ * Copyright 2015-2020, Niklas Kyster Rasmussen, Flaming Candle
  *
  * This file is part of Graph
  *
@@ -28,57 +28,58 @@ import java.util.Set;
 /**
  *
  * @author Candle
+ * @param <T>
  */
-public class Graph {
+public class Graph<T extends Node> {
 
-	Set<Edge> edges = new HashSet<Edge>();
-	Set<Node> nodes = new HashSet<Node>();
-	private final Distance distance;
+    Set<Edge<T>> edges = new HashSet<>();
+    Set<T> nodes = new HashSet<>();
+    private final Distance distance;
 
-	public Graph(Distance distance) {
-		this.distance = distance;
-	}
+    public Graph(Distance distance) {
+        this.distance = distance;
+    }
 
-	public void addEdge(Edge e) {
-		edges.add(e);
-		nodes.add(e.getStart());
-		nodes.add(e.getEnd());
-		e.getStart().addOutgoingEdge(e);
-		e.getEnd().addIncommingEdge(e);
-	}
+    public void addEdge(Edge<T> e) {
+        edges.add(e);
+        nodes.add(e.getStart());
+        nodes.add(e.getEnd());
+        e.getStart().addOutgoingEdge(e);
+        e.getEnd().addIncommingEdge(e);
+    }
 
-	public void addNode(Node n) {
-		nodes.add(n);
-	}
+    public void addNode(T n) {
+        nodes.add(n);
+    }
 
-	public Set<Edge> getEdges() {
-		return Collections.unmodifiableSet(edges);
-	}
+    public Set<Edge<T>> getEdges() {
+        return Collections.unmodifiableSet(edges);
+    }
 
-	public Set<Node> getNodes() {
-		return Collections.unmodifiableSet(nodes);
-	}
+    public Set<T> getNodes() {
+        return Collections.unmodifiableSet(nodes);
+    }
 
-	public boolean isDisconnected() {
-		for (Node n : nodes) {
-            if (n.getIncommingEdges().size() == 0 && n.getOutgoingEdges().size() == 0) return true;
-		}
-		return false;
-	}
+    public boolean isDisconnected() {
+        for (T n : nodes) {
+            if (n.getIncommingEdges().isEmpty() && n.getOutgoingEdges().isEmpty()) return true;
+        }
+        return false;
+    }
 
-	public void clear() {
-		for (Node n : nodes) {
-			n.clearEdges();
-		}
-		nodes.clear();
-		edges.clear();
-	}
+    public void clear() {
+        for (T n : nodes) {
+            n.clearEdges();
+        }
+        nodes.clear();
+        edges.clear();
+    }
 
-	public int distanceBetween(Node a, Node b) {
-		return distance.distanceBetween(a, b);
-	}
+    public int distanceBetween(T a, T b) {
+        return distance.distanceBetween(a, b);
+    }
 
-	public List<Node> routeBetween(Node start, Node end) {
+    public List<T> routeBetween(T start, T end) {
         return distance.routeBetween(start, end);
-	}
+    }
 }

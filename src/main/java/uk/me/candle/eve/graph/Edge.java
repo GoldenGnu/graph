@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2016, Niklas Kyster Rasmussen, Flaming Candle
+ * Copyright 2015-2020, Niklas Kyster Rasmussen, Flaming Candle
  *
  * This file is part of Graph
  *
@@ -23,38 +23,40 @@ package uk.me.candle.eve.graph;
 /**
  *
  * @author Candle
+ * @param <T>
  */
-public class Edge {
+public class Edge<T extends Node> {
+
     int weight;
-    Node start;
-    Node end;
+    T start;
+    T end;
 
-	public Edge(Node start, Node end) {
-		this(start, end, 1);
-	}
+    public Edge(T start, T end) {
+        this(start, end, 1);
+    }
 
-    public Edge(Node start, Node end, int weight) {
+    public Edge(T start, T end, int weight) {
         if (start == end) {
             throw new IllegalArgumentException("The edge cannot be a self loop.");
         }
         this.start = start;
         this.end = end;
-		this.weight = weight;
+        this.weight = weight;
     }
     
     public String toDotLine() {
         return "node" + start.hashCode() + " -> " + "node" + end.hashCode();
     }
 
-	public int getWeight() {
-		return weight;
-	}
+    public int getWeight() {
+        return weight;
+    }
 
-    public Node getEnd() {
+    public T getEnd() {
         return end;
     }
 
-    public Node getStart() {
+    public T getStart() {
         return start;
     }
 }

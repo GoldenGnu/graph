@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2016, Niklas Kyster Rasmussen, Flaming Candle
+ * Copyright 2015-2020, Niklas Kyster Rasmussen, Flaming Candle
  *
  * This file is part of Graph
  *
@@ -26,18 +26,18 @@ import uk.me.candle.eve.graph.Distance;
 import uk.me.candle.eve.graph.Node;
 
 
-public class Coordinates implements Distance {
+public class Coordinates<T extends Node> implements Distance<T> {
 
-	@Override
-	public int distanceBetween(Node a, Node b) {
-		double xx = (int) Math.pow(a.getX() - b.getX(), 2);
-		double yy = Math.pow(a.getY() - b.getY(), 2);
-		return (int) Math.sqrt(xx + yy);
-	}
+    @Override
+    public int distanceBetween(T a, T b) {
+        double xx = (int) Math.pow(a.getX() - b.getX(), 2);
+        double yy = Math.pow(a.getY() - b.getY(), 2);
+        return (int) Math.sqrt(xx + yy);
+    }
 
-	@Override
-	public List<Node> routeBetween(Node start, Node end) {
-		return Collections.emptyList();
-	}
-	
+    @Override
+    public List<T> routeBetween(T start, T end) {
+        return Collections.emptyList();
+    }
+    
 }
